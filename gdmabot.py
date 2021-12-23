@@ -74,10 +74,10 @@ def comandos():
     def start(message):
 
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=False)
-        markup.add('/start','/status','/update','/screenshot','/webcam','/command','/lock','/desligar')
+        markup.add('/start','/status','/update','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
 
         if message.chat.id == admin_id:
-            bot.send_message(message.chat.id, '🎈 Olá novamente!\n\n\n🔸 /status\n\n🔸 /update\n\n🔸 /screenshot\n\n🔸 /webcam\n\n🔸 /command\n\n🔸 /lock\n\n🔸 /desligar', reply_markup=markup)
+            bot.send_message(message.chat.id, '🎈 Olá novamente!', reply_markup=markup)
         else:
             bot.send_message(message.chat.id, 'Você não é um deles 😎🤭')
             bot.send_message(admin_id, 'Há uma pessoa tentando usar o bot: {} {}'.format(message.chat.first_name, message.chat.last_name))
@@ -133,6 +133,18 @@ def comandos():
             os.system('i3lock')
         else:
             bot.send_message(message.chat.id, 'Você não é um deles 😎🤭')
+    
+
+
+    # Comando unlock (desbloqueia o sistema - i3lock)
+    @bot.message_handler(commands=['unlock'])
+    def unlock(message):
+        
+        if message.chat.id == admin_id:
+            bot.send_message(message.chat.id, '🎈 Tela desbloqueada.')
+            os.system('pkill -f i3lock')
+        else:
+            bot.send_message(message.chat.id, 'Você não é um deles 😎🤭')
 
 
 
@@ -154,7 +166,7 @@ def comandos():
     def processo(message):
 
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=False)
-        markup.add('/start','/status','/update','/screenshot','/webcam','/command','/lock','/desligar')
+        markup.add('/start','/status','/update','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
         cmd = message.text
         input_comando = User.cmd = str(cmd)
 
@@ -163,7 +175,7 @@ def comandos():
             subprocess_return = exit.stdout.read()
             bot.send_message(message.chat.id, subprocess_return, reply_markup=markup)
         except Exception as e:
-            bot.send_message(message.chat.id, '🎈 O comando foi executado, porém não há output disponível para mostrar', reply_markup=markup)
+            bot.send_message(message.chat.id, '🎈 O comando foi executado, porém não há output disponível para exibir', reply_markup=markup)
 
 
 
