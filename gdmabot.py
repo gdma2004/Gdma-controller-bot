@@ -29,10 +29,10 @@ from logging import exception
 
 
 # Bot Token
-bot = telebot.TeleBot('token')
+bot = telebot.TeleBot('BOTE_SEU_TOKEN_AQUI')
 
 # Admin User ID
-admin_id = seu_id
+admin_id = BOTE_SEU_ID_AQUI
 
 # Home
 home = os.getenv('HOME')
