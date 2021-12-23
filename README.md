@@ -3,12 +3,20 @@
 ## Coloque o arquivo sh em um script de inicialização
 
 ## Precauções:
-#### Jamais exponha seu token, caso contrário, terão acesso integral do sistema;
-#### Evite deixar sua conta do telegram aberta;
-#### Tenha certeza de que o(s) id(s) de usuário(s) inserido(s) é(são) realmente o(s) seu(s).
+#### 1) Jamais exponha seu token, caso contrário, terão acesso integral ao sistema;
+#### 2) Evite deixar sua conta do telegram aberta;
+#### 3) Tenha certeza de que o id de usuário inserido é realmente o seu.
 
 
 ## Dependências
-#### maim (screenshot)
-#### ffmpeg (webcam)
-#### i3lock (lockscreen)
+#### 1) maim (screenshot)
+#### 2) ffmpeg (webcam)
+#### 3) i3lock (lockscreen)
+
+## Módulos
+#### 1) pytelegrambotapi
+#### 2) thread
+#### 3) os
+#### 4) psutil
+#### 5) time
+#### 6) subprocess
