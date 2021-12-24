@@ -120,7 +120,7 @@ def comandos():
         markup.add('/start','/status','/voice','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
         comando_de_voz = message.text
         input_comando_voz = User_voice.vc = str(comando_de_voz)
-        os.system('espeak -vpt-pt "{}"'.format(input_comando_voz))
+        os.system('espeak -vpt-BR+f4 -s170 "{}"'.format(input_comando_voz))
         bot.send_message(message.chat.id,'🎈 Comando de áudio enviado')
 
 
