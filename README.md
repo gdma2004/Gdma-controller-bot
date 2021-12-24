@@ -14,7 +14,7 @@
 #### 1) maim (screenshot)
 #### 2) ffmpeg (webcam)
 #### 3) i3lock (lockscreen)
-#### 4) alacritty (terminal)
+#### 4) espeak (voice)
 
 
 
