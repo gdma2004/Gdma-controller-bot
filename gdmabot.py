@@ -74,7 +74,7 @@ def comandos():
     def start(message):
 
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=False)
-        markup.add('/start','/status','/update','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
+        markup.add('/start','/status','/voice','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
 
         if message.chat.id == admin_id:
             bot.send_message(message.chat.id, '🎈 Olá novamente!', reply_markup=markup)
@@ -99,16 +99,29 @@ def comandos():
     
 
 
-    # Comando update (atualiza repositórios do solus*)
-    @bot.message_handler(commands=['update'])
-    def update(message):
+    # Comando voice (roda um comando de voz)
+    class User_voice:
+            def __init__(self, voice):
+                self.vc = voice
+
+    @bot.message_handler(commands=['voice'])
+    def voice(message):
 
         if message.chat.id == admin_id:
-            bot.send_message(message.chat.id, '🎈 Um terminal foi aberto, digite sua senha.')
-            os.system('alacritty -e sudo eopkg up')
+            audio_message = bot.reply_to(message, '🎈 Digite o que você quer falar')
+            bot.register_next_step_handler(audio_message, processo_audio)
         else:
             bot.send_message(message.chat.id, 'Você não é um deles 😎🤭')
 
+
+    def processo_audio(message):
+
+        markup = types.ReplyKeyboardMarkup(one_time_keyboard=False)
+        markup.add('/start','/status','/voice','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
+        comando_de_voz = message.text
+        input_comando_voz = User_voice.vc = str(comando_de_voz)
+        os.system('espeak -vpt-pt "{}"'.format(input_comando_voz))
+        bot.send_message(message.chat.id,'🎈 Comando de áudio enviado')
 
 
     # Comando screenshot (tira print do sistema e envia ao usuário)
@@ -130,7 +143,7 @@ def comandos():
 
         if message.chat.id == admin_id:
             bot.send_message(message.chat.id, '🎈 Tela bloqueada.')
-            os.system('i3lock')
+            os.system('i3lock -c 000000')
         else:
             bot.send_message(message.chat.id, 'Você não é um deles 😎🤭')
     
@@ -166,7 +179,7 @@ def comandos():
     def processo(message):
 
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=False)
-        markup.add('/start','/status','/update','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
+        markup.add('/start','/status','/voice','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
         cmd = message.text
         input_comando = User.cmd = str(cmd)
 
