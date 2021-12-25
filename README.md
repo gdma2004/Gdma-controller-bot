@@ -15,6 +15,7 @@
 #### 2) ffmpeg (webcam)
 #### 3) i3lock (lockscreen)
 #### 4) espeak (voice)
+#### 5) arecord (gravar som ambiente)
 
 
 
