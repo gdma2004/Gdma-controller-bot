@@ -36,5 +36,4 @@
 1) Clone o repositório na sua home;
 2) Torne o arquivo "sh" executável com "chmod +x";
 3) Faça o arquivo "sh" executar no boot (a forma como você fará isso dependerá do seu ambiente gráfico);
-4) No arquivo "py", altere o comando de update (padrão = solus);
-5) No arquivo "py", coloque o token do seu bot e seu id de usuário nos locais solicitados.
+4) No arquivo "py", coloque o token do seu bot e seu id de usuário nos locais solicitados.
