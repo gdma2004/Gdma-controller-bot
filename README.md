@@ -1,6 +1,6 @@
 # Gdma-controller-bot
 
-##Bot pessoal de telegram para uso remoto.
+## Bot pessoal de telegram para uso remoto.
 
 ## Precauções:
 1) Jamais exponha seu token, caso contrário, terão acesso integral ao seu sistema;
